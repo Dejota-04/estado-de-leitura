@@ -178,16 +178,17 @@
                     // CRIAÇÃO DO BANCO DE DADOS COM IDs
                     bancoDeDados = linhas.map((c, index) => {
                         return {
-                            id: index,      // ID Único para evitar erros de caracteres
-                            autor: c[0],    // Coluna A
-                            ano: c[1],      // Coluna B
-                            titulo: c[2],   // Coluna C
-                            texto: c[3],    // Coluna D
-                            link1: c[4],    // Coluna E
-                            link2: c[5],    // Coluna F
-                            link3: c[6],    // Coluna G
-                            area: c[7],     // Coluna H
-                            subarea: c[8]   // Coluna I
+                            id: index,      // ID Único
+                            autor: c[0],    // Col A
+                            ano: c[1],      // Col B
+                            titulo: c[2],   // Col C
+                            texto: c[3],    // Col D
+                            link1: c[4],    // Col E
+                            link2: c[5],    // Col F
+                            link3: c[6],    // Col G
+                            link4: c[7],    // Col H (NOVO - LINK 4)
+                            area: c[8],     // Col I (DESLOCADO)
+                            subarea: c[9]   // Col J (DESLOCADO)
                         };
                     });
 
@@ -288,10 +289,12 @@
             const btns = document.getElementById('area-botoes');
             btns.innerHTML = '';
 
-            // Botões de Download
+            // Botões de Download (AGORA ATÉ O LINK 4)
             if(post.link1 && post.link1.includes('http')) btns.innerHTML += `<a href="${post.link1}" target="_blank" class="btn-download">📄 Acessar Material 1</a>`;
             if(post.link2 && post.link2.includes('http')) btns.innerHTML += `<a href="${post.link2}" target="_blank" class="btn-download" style="background-color: #5c5c8a; margin-left:10px;">📄 Acessar Material 2</a>`;
             if(post.link3 && post.link3.includes('http')) btns.innerHTML += `<a href="${post.link3}" target="_blank" class="btn-download" style="background-color: #7d7dff; margin-left:10px;">📄 Acessar Material 3</a>`;
+            // BOTÃO 4 NOVO:
+            if(post.link4 && post.link4.includes('http')) btns.innerHTML += `<a href="${post.link4}" target="_blank" class="btn-download" style="background-color: #555; margin-left:10px;">📄 Acessar Material 4</a>`;
 
             document.getElementById('tela-lista').style.display = 'none';
             document.getElementById('tela-leitura').style.display = 'block';
