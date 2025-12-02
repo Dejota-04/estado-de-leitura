@@ -23,129 +23,42 @@
         /* HEADER */
         header {
             background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507842217153-e212234687ad?q=80&w=2070');
-            background-size: cover; background-position: center; height: 250px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white; padding: 0 20px;
+            background-size: cover; background-position: center;
+            min-height: 250px; padding: 60px 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: white;
         }
-        header h1 { font-size: 2.5rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-        header p { font-size: 1rem; opacity: 0.9; letter-spacing: 1px; }
+        header h1 { font-size: 3rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.1; }
+        header p { font-size: 1.2rem; opacity: 0.9; letter-spacing: 1px; margin-top: 10px; }
 
-        /* --- MENU DE NAVEGAÇÃO (ESTILO LIMPO - SEM HAMBURGUER) --- */
-        nav {
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-color);
-            min-height: 60px; /* Altura mínima */
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            padding: 5px 0;
-        }
+        @media (max-width: 768px) { header h1 { font-size: 2rem; } header p { font-size: 1rem; } }
 
-        .menu-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 10px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Lista Horizontal Sempre */
-        nav ul {
-            list-style: none;
-            display: flex;
-            flex-wrap: wrap; /* Permite quebrar linha se a tela for muito minuscula */
-            justify-content: center;
-            align-items: center;
-            margin: 0; padding: 0;
-        }
-
-        nav a {
-            display: block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
+        /* --- MENU --- */
+        nav { background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
+        .menu-container { max-width: 1000px; margin: 0 auto; text-align: center; padding: 0 10px; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
+        nav li { position: relative; }
+        nav a { display: block; padding: 18px 20px; text-decoration: none; color: var(--primary-color); font-weight: bold; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; transition: 0.2s; cursor: pointer; white-space: nowrap; }
         nav a:hover { color: var(--accent-color); background: #fafafa; }
 
-        /* Seta do Dropdown */
-        .arrow { display: inline-block; transition: transform 0.3s ease; margin-left: 5px; font-size: 0.7rem; }
-
-        /* Dropdown (Submenu) */
+        /* DROPDOWN */
         .dropdown { position: relative; }
+        .dropdown-content { display: none; position: absolute; background: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); top: 100%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 1001; padding-top: 10px; margin-top: -5px; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown-content a { border-bottom: 1px solid #f0f0f0; text-transform: none; padding: 12px 20px; display: block; }
 
-        /* O menu dropdown flutuante */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%); /* Centraliza abaixo do item pai */
-            text-align: left;
-            z-index: 1001;
-            border-radius: 0 0 8px 8px;
-            border-top: 2px solid var(--accent-color);
-        }
-
-        /* Mostra dropdown ao passar o mouse (Desktop) */
-        @media (min-width: 769px) {
-            .dropdown:hover .dropdown-content { display: block; animation: slideUp 0.3s ease; }
-        }
-
-        /* Classe para mostrar dropdown via JS (Mobile/Click) */
-        .dropdown-content.show { display: block; animation: slideUp 0.3s ease; }
-
-        .dropdown-content a {
-            border-bottom: 1px solid #f5f5f5;
-            text-transform: none;
-            padding: 12px 20px;
-            white-space: nowrap; /* Não deixa o texto quebrar */
-            font-size: 0.85rem;
-        }
-        .dropdown-content a:hover { background-color: #f9f9f9; color: var(--accent-color); }
-
-        /* --- AJUSTES PARA CELULAR (SEM ESCONDER NADA) --- */
+        /* MOBILE */
         @media (max-width: 768px) {
-            header { height: 200px; }
-            header h1 { font-size: 1.8rem; }
-
-            nav { padding: 0; }
-            nav ul { width: 100%; justify-content: space-evenly; }
-
-            /* Diminui fonte e padding para caber na tela do celular */
-            nav a {
-                padding: 15px 5px;
-                font-size: 0.65rem; /* Fonte menor para caber */
-                text-align: center;
-            }
-
-            /* Dropdown no mobile */
-            .dropdown-content {
-                position: absolute; /* Flutua por cima do conteúdo */
-                width: 200px;
-                left: 50%; transform: translateX(-50%);
-            }
-
-            /* Seta gira quando ativo */
-            .dropdown.active .arrow { transform: rotate(180deg); }
+            nav a { padding: 12px 10px; font-size: 0.7rem; border-bottom: 1px solid #f9f9f9; width: 100%; }
+            nav ul { flex-direction: column; }
+            nav li { width: 100%; }
+            .dropdown-content { position: static; display: none; width: 100%; box-shadow: none; border: 1px solid #eee; transform: none; background: #fdfdfd; }
+            .dropdown:hover .dropdown-content { display: block; }
+            .dropdown-content a { padding-left: 0; color: #555; }
         }
 
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
-        /* INTRODUÇÃO */
+        /* INTRO */
         .intro-blog { text-align: center; max-width: 750px; margin: 0 auto 50px auto; padding-bottom: 30px; border-bottom: 1px solid var(--border-color); }
         .intro-blog h2 { font-size: 2.2rem; margin-bottom: 25px; color: var(--primary-color); }
         .intro-blog p { font-size: 1.1rem; color: #555; margin-bottom: 15px; }
@@ -153,14 +66,10 @@
 
         /* PESQUISA */
         .search-wrapper { text-align: center; margin-bottom: 50px; }
-        #input-pesquisa {
-            width: 100%; max-width: 450px; padding: 12px 25px; border: 1px solid #ddd; border-radius: 50px;
-            font-size: 1rem; font-family: 'Lato', sans-serif; background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s; outline: none;
-        }
+        #input-pesquisa { width: 100%; max-width: 450px; padding: 12px 25px; border: 1px solid #ddd; border-radius: 50px; font-size: 1rem; font-family: 'Lato', sans-serif; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s; outline: none; }
         #input-pesquisa:focus { border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-        /* GRID POSTS */
+        /* GRID */
         .posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
         .card { background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: transparent; }
@@ -173,7 +82,7 @@
         .btn-ler { display: block; width: 100%; padding: 12px 0; text-align: center; border: 1px solid var(--primary-color); color: var(--primary-color); text-transform: uppercase; font-size: 0.75rem; font-weight: bold; cursor: pointer; background: transparent; transition: 0.3s; border-radius: 4px; letter-spacing: 1px; }
         .btn-ler:hover { background: var(--primary-color); color: white; }
 
-        /* TELA DE LEITURA */
+        /* LEITURA */
         #tela-leitura { display: none; background: white; padding: 50px 0; animation: fadeIn 0.4s ease; }
         .leitura-header { max-width: 750px; margin: 0 auto 30px auto; text-align: left; }
         .btn-voltar { background: none; border: none; color: #777; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; padding: 0; transition: 0.2s; }
@@ -203,7 +112,6 @@
         #toast-box.show { visibility: visible; opacity: 1; bottom: 50px; }
 
         footer { text-align: center; padding: 40px; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; margin-top: 60px; background: #fafafa; }
-        @keyframes slideUp { from { opacity: 0; transform: translate(-50%, 10px); } to { opacity: 1; transform: translate(-50%, 0); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -223,9 +131,7 @@
                 <li><a onclick="filtrar('Obras da Fuvest', null, true)">Obras da Fuvest</a></li>
 
                 <li class="dropdown" id="lp-dropdown">
-                    <a onclick="toggleDropdown(event)">
-                        Língua Portuguesa <span class="arrow">▾</span>
-                    </a>
+                    <a style="cursor: default;">Língua Portuguesa ▾</a>
                     <div class="dropdown-content" id="lp-content">
                         <a onclick="filtrar('Língua Portuguesa', null, true)">Ver Todas</a>
                         <a onclick="filtrar('Língua Portuguesa', 'Produção Escrita', true)">Produção Escrita</a>
@@ -299,41 +205,7 @@
 
         let bancoDeDados = [];
 
-        // --- LÓGICA DO MENU (SIMPLIFICADA) ---
-        // Agora só precisamos controlar o Dropdown
-        function toggleDropdown(e) {
-            // Em telas menores ou touch, ao clicar em "Língua Portuguesa", abre o menu
-            // Se for desktop, o CSS :hover já resolve, mas o clique não atrapalha
-            const dropdown = document.getElementById('lp-dropdown');
-            const content = document.getElementById('lp-content');
-
-            // Se já estiver aberto, fecha. Se não, abre.
-            if(content.classList.contains('show')) {
-                content.classList.remove('show');
-                dropdown.classList.remove('active');
-            } else {
-                e.preventDefault(); // Evita recarregar ou pular
-                content.classList.add('show');
-                dropdown.classList.add('active');
-            }
-        }
-
-        // Fechar o dropdown se clicar fora dele
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropdown a') && !event.target.matches('.dropdown span')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var arrows = document.getElementsByClassName("dropdown");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    if (dropdowns[i].classList.contains('show')) {
-                        dropdowns[i].classList.remove('show');
-                    }
-                }
-                for (var i = 0; i < arrows.length; i++) {
-                    arrows[i].classList.remove('active');
-                }
-            }
-        }
-
+        // FUNÇÃO DE SLUG
         function criarSlug(texto) {
             return texto.toString().toLowerCase()
                 .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -346,9 +218,32 @@
                 download: true, header: false, skipEmptyLines: true,
                 complete: function(resultados) {
                     const linhas = resultados.data.slice(1);
+                    const slugsVistos = {}; // Mapa para evitar duplicidade de slug
+
                     bancoDeDados = linhas.map((c, index) => {
+                        let titulo = c[2] || "Sem Titulo";
+                        let autor = c[0] || "Desconhecido";
+
+                        // MÁGICA AQUI: SLUG É TITULO + AUTOR
+                        let rawSlug = titulo + "-" + autor;
+                        let baseSlug = criarSlug(rawSlug);
+
+                        // Segurança extra contra duplicidade (se mesmo autor tiver 2 posts iguais)
+                        let uniqueSlug = baseSlug;
+                        if (slugsVistos[baseSlug]) {
+                            slugsVistos[baseSlug]++;
+                            uniqueSlug = `${baseSlug}-${slugsVistos[baseSlug]}`;
+                        } else {
+                            slugsVistos[baseSlug] = 1;
+                        }
+
                         return {
-                            id: index, autor: c[0], ano: c[1], titulo: c[2], texto: c[3],
+                            id: index,
+                            slug: uniqueSlug, // Usa o slug gerado (titulo + autor)
+                            autor: autor,
+                            ano: c[1],
+                            titulo: titulo,
+                            texto: c[3],
                             link1: c[4], link2: c[5], link3: c[6], link4: c[7],
                             area: c[8], subarea: c[9]
                         };
@@ -365,7 +260,7 @@
             const sub = params.get('sub');
 
             if (postSlug) {
-                const post = bancoDeDados.find(p => criarSlug(p.titulo) === postSlug);
+                const post = bancoDeDados.find(p => p.slug === postSlug);
                 if (post) abrirPost(post.id, false);
             }
             else if (cat) {
@@ -409,12 +304,6 @@
         function filtrar(cat, sub = null, atualizarUrl = true) {
             document.getElementById('input-pesquisa').value = '';
 
-            // Fecha dropdown ao clicar num link
-            const content = document.getElementById('lp-content');
-            if(content) content.classList.remove('show');
-
-            document.getElementById('lp-dropdown').classList.remove('active');
-
             if (atualizarUrl) {
                 if (cat === 'tudo') {
                     window.history.pushState({}, '', window.location.pathname);
@@ -455,8 +344,7 @@
             if(!post) return;
 
             if (atualizarUrl) {
-                const slug = criarSlug(post.titulo);
-                const novaUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?post=' + slug;
+                const novaUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?post=' + post.slug;
                 window.history.pushState({path: novaUrl}, '', novaUrl);
             }
 
@@ -471,11 +359,10 @@
             divDownloads.innerHTML = '';
             divShare.innerHTML = '';
 
-            // Botões de Arquivos
-            if(post.link1 && post.link1.includes('http')) divDownloads.innerHTML += `<a href="${post.link1}" target="_blank" class="btn-file"><span>📄</span> Material 1</a>`;
-            if(post.link2 && post.link2.includes('http')) divDownloads.innerHTML += `<a href="${post.link2}" target="_blank" class="btn-file"><span>📄</span> Material 2</a>`;
-            if(post.link3 && post.link3.includes('http')) divDownloads.innerHTML += `<a href="${post.link3}" target="_blank" class="btn-file"><span>📄</span> Material 3</a>`;
-            if(post.link4 && post.link4.includes('http')) divDownloads.innerHTML += `<a href="${post.link4}" target="_blank" class="btn-file"><span>📄</span> Material 4</a>`;
+            if(post.link1 && post.link1.includes('http')) divDownloads.innerHTML += `<a href="${post.link1}" target="_blank" class="btn-file"><span>📄</span> Material Principal</a>`;
+            if(post.link2 && post.link2.includes('http')) divDownloads.innerHTML += `<a href="${post.link2}" target="_blank" class="btn-file"><span>🔗</span> Material Extra 1</a>`;
+            if(post.link3 && post.link3.includes('http')) divDownloads.innerHTML += `<a href="${post.link3}" target="_blank" class="btn-file"><span>🔗</span> Material Extra 2</a>`;
+            if(post.link4 && post.link4.includes('http')) divDownloads.innerHTML += `<a href="${post.link4}" target="_blank" class="btn-file"><span>🔗</span> Material Extra 3</a>`;
 
             if(divDownloads.innerHTML === '') divDownloads.innerHTML = '<p style="color:#999; font-style:italic;">Nenhum anexo disponível.</p>';
 
