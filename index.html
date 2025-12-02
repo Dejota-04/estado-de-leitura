@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estado de Leitura</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,82 +15,140 @@
     <style>
         /* --- ESTILOS GERAIS --- */
         :root {
-            --bg-body: #f9fbfb;
-            --text-color: #333;
+            --bg-body: #fdfdfd;
+            --text-color: #2c2c2c;
             --primary-color: #2c3e50;
             --accent-color: #c0392b;
-            --border-color: #e1e1e1;
+            --border-color: #e5e5e5;
+            --whatsapp-color: #25D366;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Lato', sans-serif; background-color: var(--bg-body); color: var(--text-color); line-height: 1.6; }
+        body { font-family: 'Lato', sans-serif; background-color: var(--bg-body); color: var(--text-color); line-height: 1.8; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary-color); }
 
         /* HEADER */
         header {
-            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1507842217153-e212234687ad?q=80&w=2070');
-            background-size: cover; background-position: center; height: 350px;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507842217153-e212234687ad?q=80&w=2070');
+            background-size: cover; background-position: center; height: 320px;
             display: flex; align-items: center; justify-content: center; text-align: center; color: white;
         }
-        header h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        header h1 { font-size: 3rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+        header p { font-size: 1.1rem; opacity: 0.9; letter-spacing: 1px; }
 
-        /* MENU DE NAVEGAÇÃO */
-        nav { background: white; position: sticky; top: 0; z-index: 1000; text-align: center; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        /* MENU */
+        nav { background: white; position: sticky; top: 0; z-index: 1000; text-align: center; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
-        nav a { display: block; padding: 20px 25px; text-decoration: none; color: var(--primary-color); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-        nav a:hover { color: var(--accent-color); background: #f9f9f9; }
+        nav a { display: block; padding: 18px 22px; text-decoration: none; color: var(--primary-color); font-weight: bold; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; transition: 0.2s; }
+        nav a:hover { color: var(--accent-color); background: #fafafa; }
 
-        /* Dropdown */
+        /* DROPDOWN */
         .dropdown { position: relative; }
         .dropdown-content { display: none; position: absolute; background: white; min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); top: 100%; left: 0; text-align: left; }
         .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { border-bottom: 1px solid #eee; text-transform: none; }
+        .dropdown-content a { border-bottom: 1px solid #f0f0f0; text-transform: none; padding: 12px 20px; }
 
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
 
-        /* --- SEÇÃO DE INTRODUÇÃO (SOBRE O BLOG) --- */
-        .intro-blog {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 50px auto;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #eee;
-        }
-        .intro-blog h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary-color); }
-        .intro-blog p { font-size: 1.1rem; color: #555; margin-bottom: 15px; line-height: 1.8; }
-        .intro-blog .destaque-texto { color: var(--accent-color); font-weight: bold; font-family: 'Playfair Display', serif; font-style: italic; }
+        /* INTRODUÇÃO */
+        .intro-blog { text-align: center; max-width: 750px; margin: 0 auto 60px auto; padding-bottom: 40px; border-bottom: 1px solid var(--border-color); }
+        .intro-blog h2 { font-size: 2.2rem; margin-bottom: 25px; color: var(--primary-color); }
+        .intro-blog p { font-size: 1.1rem; color: #555; margin-bottom: 15px; }
+        .destaque-texto { color: var(--accent-color); font-weight: bold; font-family: 'Playfair Display', serif; font-style: italic; }
 
-        /* BARRA DE PESQUISA */
-        .search-wrapper { text-align: center; margin-bottom: 40px; }
+        /* PESQUISA */
+        .search-wrapper { text-align: center; margin-bottom: 50px; }
         #input-pesquisa {
-            width: 100%; max-width: 500px; padding: 15px 25px;
+            width: 100%; max-width: 450px; padding: 12px 25px;
             border: 1px solid #ddd; border-radius: 50px;
             font-size: 1rem; font-family: 'Lato', sans-serif;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03); transition: 0.3s; outline: none;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02); transition: 0.3s; outline: none;
         }
-        #input-pesquisa:focus { border-color: var(--primary-color); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        #input-pesquisa:focus { border-color: var(--primary-color); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-        /* GRID DE POSTS */
-        .posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* GRID POSTS */
+        .posts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
 
-        .card { background: white; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .card-img-top { height: 180px; background-color: #ddd; background-size: cover; background-position: center; }
+        .card { background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); border-color: transparent; }
+        .card-img-top { height: 200px; background-color: #f0f0f0; background-size: cover; background-position: center; }
         .card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .badge-area { font-size: 0.7rem; text-transform: uppercase; font-weight: bold; color: var(--accent-color); margin-bottom: 10px; letter-spacing: 1px; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 10px; line-height: 1.3; }
+        .badge-area { font-size: 0.7rem; text-transform: uppercase; font-weight: 700; color: var(--accent-color); margin-bottom: 12px; letter-spacing: 0.5px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 10px; line-height: 1.35; color: #1a1a1a; }
         .meta-info { font-size: 0.8rem; color: #888; margin-bottom: 15px; }
-        .resumo { font-size: 0.95rem; color: #555; margin-bottom: 20px; flex-grow: 1; }
+        .resumo { font-size: 0.95rem; color: #666; margin-bottom: 20px; flex-grow: 1; line-height: 1.6; }
 
-        .btn-ler { display: block; width: 100%; padding: 10px 0; text-align: center; border: 1px solid var(--primary-color); color: var(--primary-color); text-transform: uppercase; font-size: 0.8rem; font-weight: bold; cursor: pointer; background: transparent; transition: 0.3s; }
+        .btn-ler { display: block; width: 100%; padding: 12px 0; text-align: center; border: 1px solid var(--primary-color); color: var(--primary-color); text-transform: uppercase; font-size: 0.75rem; font-weight: bold; cursor: pointer; background: transparent; transition: 0.3s; border-radius: 4px; letter-spacing: 1px; }
         .btn-ler:hover { background: var(--primary-color); color: white; }
 
-        /* TELA DE LEITURA */
-        #tela-leitura { display: none; background: white; padding: 40px; border: 1px solid var(--border-color); }
-        .btn-voltar { border: none; background: none; cursor: pointer; color: #666; font-size: 1rem; margin-bottom: 20px; }
-        .texto-conteudo { white-space: pre-wrap; font-size: 1.1rem; color: #444; margin: 30px 0; }
-        .btn-download { background: var(--primary-color); color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; display: inline-block; margin-right: 10px; font-weight: bold; margin-bottom: 10px; }
+        /* --- TELA DE LEITURA --- */
+        #tela-leitura { display: none; background: white; padding: 50px 0; animation: fadeIn 0.4s ease; }
 
-        footer { text-align: center; padding: 40px; color: #999; font-size: 0.9rem; border-top: 1px solid #ddd; margin-top: 50px; }
+        .leitura-header { max-width: 750px; margin: 0 auto 30px auto; text-align: left; }
+        .btn-voltar { background: none; border: none; color: #777; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 5px; margin-bottom: 20px; padding: 0; transition: 0.2s; }
+        .btn-voltar:hover { color: var(--accent-color); }
+
+        .leitura-title { font-size: 2.8rem; line-height: 1.2; margin-bottom: 15px; color: #111; }
+        .leitura-meta { color: #666; font-size: 0.95rem; border-left: 3px solid var(--accent-color); padding-left: 15px; margin-top: 20px; }
+
+        .leitura-body { max-width: 750px; margin: 0 auto; font-size: 1.2rem; line-height: 1.8; color: #333; margin-bottom: 50px; }
+
+        /* SEÇÃO DE AÇÕES */
+        .actions-container { max-width: 750px; margin: 0 auto; padding-top: 30px; border-top: 1px solid #eee; }
+        .actions-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #888; margin-bottom: 15px; font-weight: bold; }
+
+        /* Grid de Downloads */
+        .downloads-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
+
+        .btn-file {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 15px; background: #f8f9fa; border: 1px solid #e0e0e0;
+            border-radius: 6px; text-decoration: none; color: #333; font-weight: bold; font-size: 0.9rem;
+            transition: 0.2s;
+        }
+        .btn-file:hover { background: white; border-color: var(--primary-color); box-shadow: 0 4px 10px rgba(0,0,0,0.05); transform: translateY(-2px); }
+        .btn-file span { font-size: 1.2rem; }
+
+        /* Compartilhamento */
+        .share-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn-share {
+            display: flex; align-items: center; gap: 8px; padding: 10px 20px;
+            border-radius: 50px; font-size: 0.85rem; font-weight: bold; text-decoration: none; cursor: pointer; transition: 0.2s;
+        }
+        .share-zap { background: white; border: 1px solid var(--whatsapp-color); color: var(--whatsapp-color); }
+        .share-zap:hover { background: var(--whatsapp-color); color: white; }
+
+        .share-copy { background: white; border: 1px solid #888; color: #555; }
+        .share-copy:hover { background: #555; color: white; border-color: #555; }
+
+        /* --- NOTIFICAÇÃO TOAST (Link Copiado) --- */
+        #toast-box {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            position: fixed;
+            z-index: 2000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.5s, bottom 0.5s;
+        }
+
+        #toast-box.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+        footer { text-align: center; padding: 40px; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; margin-top: 60px; background: #fafafa; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -119,7 +178,6 @@
     <main class="container">
 
         <div id="tela-lista">
-
             <section class="intro-blog">
                 <h2>Bem-vindos ao nosso Estado de Leitura</h2>
                 <p>
@@ -140,7 +198,7 @@
                 <input type="text" id="input-pesquisa" placeholder="🔍 Pesquisar por título, autor ou assunto..." onkeyup="pesquisarGlobal()">
             </div>
 
-            <h2 id="titulo-secao" style="margin-bottom: 20px; border-left: 4px solid var(--accent-color); padding-left: 15px;">Destaques</h2>
+            <h2 id="titulo-secao" style="margin-bottom: 30px; border-left: 4px solid var(--accent-color); padding-left: 15px; font-size: 1.8rem;">Destaques</h2>
 
             <div id="grid-posts" class="posts-grid">
                 <p>Carregando...</p>
@@ -148,94 +206,74 @@
         </div>
 
         <div id="tela-leitura">
-            <button onclick="voltarParaLista()" class="btn-voltar">← Voltar</button>
-            <div style="border-bottom: 1px solid #eee; padding-bottom: 20px;">
+            <div class="leitura-header">
+                <button onclick="voltarParaLista()" class="btn-voltar">← Voltar para o início</button>
                 <small id="ler-area" class="badge-area">Área</small>
-                <h1 id="ler-titulo" style="font-size: 2.5rem; margin: 10px 0;">Titulo</h1>
-                <p>Por <strong id="ler-autor">Autor</strong> • <span id="ler-ano">Ano</span></p>
+                <h1 id="ler-titulo" class="leitura-title">Titulo da Matéria</h1>
+                <div class="leitura-meta">
+                    Por <strong id="ler-autor" style="color:#333">Autor</strong> • <span id="ler-ano">Ano</span>
+                </div>
             </div>
-            <div id="ler-texto" class="texto-conteudo"></div>
-            <div id="area-botoes"></div>
+
+            <div id="ler-texto" class="leitura-body"></div>
+
+            <div class="actions-container">
+                <p class="actions-title">📂 Materiais Disponíveis</p>
+                <div id="area-downloads" class="downloads-grid"></div>
+
+                <p class="actions-title" style="margin-top: 30px;">📢 Compartilhar</p>
+                <div id="area-share" class="share-row"></div>
+            </div>
         </div>
     </main>
+
+    <div id="toast-box">Link copiado com sucesso! ✅</div>
 
     <footer>&copy; 2025 Blog MELP - Estado de Leitura</footer>
 
     <script>
-        // --- CONFIGURAÇÃO ---
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHpZ-AxInGfWLfEmzBVfNcATN9wGgYW0bgUUJ_pn48LvfibiKYYxQdAwlgs4RtjyJnqq1k-v_Q3hJM/pub?output=csv';
 
         let bancoDeDados = [];
 
+        function criarSlug(texto) {
+            return texto.toString().toLowerCase()
+                .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                .replace(/["']/g, '').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
+        }
+
         function carregarBlog() {
             Papa.parse(SHEET_URL, {
-                download: true,
-                header: false,
-                skipEmptyLines: true,
+                download: true, header: false, skipEmptyLines: true,
                 complete: function(resultados) {
-                    const linhas = resultados.data.slice(1); // Remove cabeçalho
-
-                    // CRIAÇÃO DO BANCO DE DADOS COM IDs
+                    const linhas = resultados.data.slice(1);
                     bancoDeDados = linhas.map((c, index) => {
                         return {
-                            id: index,      // ID Único
-                            autor: c[0],    // Col A
-                            ano: c[1],      // Col B
-                            titulo: c[2],   // Col C
-                            texto: c[3],    // Col D
-                            link1: c[4],    // Col E
-                            link2: c[5],    // Col F
-                            link3: c[6],    // Col G
-                            link4: c[7],    // Col H (NOVO - LINK 4)
-                            area: c[8],     // Col I (DESLOCADO)
-                            subarea: c[9]   // Col J (DESLOCADO)
+                            id: index, autor: c[0], ano: c[1], titulo: c[2], texto: c[3],
+                            link1: c[4], link2: c[5], link3: c[6], link4: c[7],
+                            area: c[8], subarea: c[9]
                         };
                     });
-
                     renderizar(bancoDeDados);
-                },
-                error: function(err) {
-                    console.error("Erro PapaParse:", err);
+                    const params = new URLSearchParams(window.location.search);
+                    const postSlug = params.get('post');
+                    if (postSlug) {
+                        const postEncontrado = bancoDeDados.find(post => criarSlug(post.titulo) === postSlug);
+                        if (postEncontrado) abrirPost(postEncontrado.id, false);
+                    }
                 }
             });
         }
 
-        // --- FUNÇÃO DE PESQUISA ---
-        function pesquisarGlobal() {
-            const termo = document.getElementById('input-pesquisa').value.toLowerCase();
-            const tituloEl = document.getElementById('titulo-secao');
-
-            if (termo === '') {
-                tituloEl.innerText = 'Destaques';
-                renderizar(bancoDeDados);
-                return;
-            }
-
-            tituloEl.innerText = `Resultados para "${termo}"`;
-            const filtrados = bancoDeDados.filter(post => {
-                const titulo = post.titulo?.toLowerCase() || '';
-                const autor = post.autor?.toLowerCase() || '';
-                const texto = post.texto?.toLowerCase() || '';
-                const area = post.area?.toLowerCase() || '';
-
-                return titulo.includes(termo) || autor.includes(termo) || texto.includes(termo) || area.includes(termo);
-            });
-            renderizar(filtrados);
-        }
-
-        // --- RENDERIZAÇÃO DOS CARDS ---
         function renderizar(lista) {
             const area = document.getElementById('grid-posts');
             area.innerHTML = '';
-
-            if (lista.length === 0) {
-                area.innerHTML = '<p style="text-align:center; width:100%; color:#666;">Nenhum resultado encontrado.</p>'; return;
-            }
+            if (lista.length === 0) { area.innerHTML = '<p style="text-align:center;width:100%">Nada encontrado.</p>'; return; }
 
             lista.forEach(post => {
                 let imgBg = 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?w=500';
                 const areaTexto = post.area ? post.area.toLowerCase() : '';
-
                 if(areaTexto.includes('fuvest')) imgBg = 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=500';
                 if(areaTexto.includes('portuguesa')) imgBg = 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500';
 
@@ -245,7 +283,7 @@
                         <div class="card-body">
                             <div class="badge-area">${post.area || ''}</div>
                             <h3>${post.titulo || 'Sem Título'}</h3>
-                            <p class="meta-info">${post.autor || ''} • ${post.ano || ''}</p>
+                            <p class="meta-info">${post.autor || ''}</p>
                             <p class="resumo">${post.texto ? post.texto.substring(0, 100)+'...' : ''}</p>
                             <button onclick="abrirPost(${post.id})" class="btn-ler">Ler Matéria</button>
                         </div>
@@ -254,16 +292,85 @@
             });
         }
 
-        // --- FILTROS DO MENU ---
+        function abrirPost(idBusca, atualizarUrl = true) {
+            const post = bancoDeDados.find(p => p.id === idBusca);
+            if(!post) return;
+
+            if (atualizarUrl) {
+                const slug = criarSlug(post.titulo);
+                const novaUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?post=' + slug;
+                window.history.pushState({path: novaUrl}, '', novaUrl);
+            }
+
+            document.getElementById('ler-titulo').innerText = post.titulo;
+            document.getElementById('ler-autor').innerText = post.autor;
+            document.getElementById('ler-ano').innerText = post.ano;
+            document.getElementById('ler-area').innerText = post.area || '';
+            document.getElementById('ler-texto').innerText = post.texto;
+
+            const divDownloads = document.getElementById('area-downloads');
+            const divShare = document.getElementById('area-share');
+            divDownloads.innerHTML = '';
+            divShare.innerHTML = '';
+
+            // Botões de Arquivos
+            if(post.link1 && post.link1.includes('http')) divDownloads.innerHTML += `<a href="${post.link1}" target="_blank" class="btn-file"><span>📄</span> Material 1</a>`;
+            if(post.link2 && post.link2.includes('http')) divDownloads.innerHTML += `<a href="${post.link2}" target="_blank" class="btn-file"><span>📄</span> Material 2</a>`;
+            if(post.link3 && post.link3.includes('http')) divDownloads.innerHTML += `<a href="${post.link3}" target="_blank" class="btn-file"><span>📄</span> Material 3</a>`;
+            if(post.link4 && post.link4.includes('http')) divDownloads.innerHTML += `<a href="${post.link4}" target="_blank" class="btn-file"><span>📄</span> Material 4</a>`;
+
+            if(divDownloads.innerHTML === '') divDownloads.innerHTML = '<p style="color:#999; font-style:italic;">Nenhum anexo disponível.</p>';
+
+            // Botões de Compartilhar
+            divShare.innerHTML += `<button onclick="copiarLink()" class="btn-share share-copy">🔗 Copiar Link</button>`;
+
+            const zapMsg = encodeURIComponent(`Olha que legal esse material: "${post.titulo}". Acesse: `);
+            const zapUrl = window.location.href;
+            divShare.innerHTML += `<a href="https://api.whatsapp.com/send?text=${zapMsg}${zapUrl}" target="_blank" class="btn-share share-zap">📱 WhatsApp</a>`;
+
+            document.getElementById('tela-lista').style.display = 'none';
+            document.getElementById('tela-leitura').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function voltarParaLista() {
+            const urlLimpa = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            window.history.pushState({path: urlLimpa}, '', urlLimpa);
+            document.getElementById('tela-leitura').style.display = 'none';
+            document.getElementById('tela-lista').style.display = 'block';
+        }
+
+        // --- FUNÇÃO NOVA DE TOAST (Substitui o Alert) ---
+        function copiarLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const toast = document.getElementById("toast-box");
+                toast.className = "show";
+                // Some depois de 3 segundos
+                setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+        }
+
+        function pesquisarGlobal() {
+            const termo = document.getElementById('input-pesquisa').value.toLowerCase();
+            const tituloEl = document.getElementById('titulo-secao');
+            if (termo === '') { tituloEl.innerText = 'Destaques'; renderizar(bancoDeDados); return; }
+            tituloEl.innerText = `Resultados para "${termo}"`;
+            const filtrados = bancoDeDados.filter(post => {
+                const titulo = post.titulo?.toLowerCase() || '';
+                const autor = post.autor?.toLowerCase() || '';
+                const texto = post.texto?.toLowerCase() || '';
+                const area = post.area?.toLowerCase() || '';
+                return titulo.includes(termo) || autor.includes(termo) || texto.includes(termo) || area.includes(termo);
+            });
+            renderizar(filtrados);
+        }
+
         function filtrar(cat, sub = null) {
             voltarParaLista();
-            document.getElementById('input-pesquisa').value = ''; // Limpa pesquisa
-
+            document.getElementById('input-pesquisa').value = '';
             const titulo = document.getElementById('titulo-secao');
-            if (cat === 'tudo') {
-                titulo.innerText = 'Destaques';
-                renderizar(bancoDeDados);
-            } else {
+            if (cat === 'tudo') { titulo.innerText = 'Destaques'; renderizar(bancoDeDados); }
+            else {
                 titulo.innerText = sub ? `${cat} > ${sub}` : cat;
                 const filtrados = bancoDeDados.filter(p => {
                     const pArea = p.area ? p.area.toLowerCase() : '';
@@ -273,37 +380,6 @@
                 });
                 renderizar(filtrados);
             }
-        }
-
-        // --- ABRIR POSTAGEM (USANDO ID) ---
-        function abrirPost(idBusca) {
-            const post = bancoDeDados.find(p => p.id === idBusca);
-            if(!post) return;
-
-            document.getElementById('ler-titulo').innerText = post.titulo;
-            document.getElementById('ler-autor').innerText = post.autor;
-            document.getElementById('ler-ano').innerText = post.ano;
-            document.getElementById('ler-area').innerText = post.area || '';
-            document.getElementById('ler-texto').innerText = post.texto;
-
-            const btns = document.getElementById('area-botoes');
-            btns.innerHTML = '';
-
-            // Botões de Download (AGORA ATÉ O LINK 4)
-            if(post.link1 && post.link1.includes('http')) btns.innerHTML += `<a href="${post.link1}" target="_blank" class="btn-download">📄 Acessar Material 1</a>`;
-            if(post.link2 && post.link2.includes('http')) btns.innerHTML += `<a href="${post.link2}" target="_blank" class="btn-download" style="background-color: #5c5c8a; margin-left:10px;">📄 Acessar Material 2</a>`;
-            if(post.link3 && post.link3.includes('http')) btns.innerHTML += `<a href="${post.link3}" target="_blank" class="btn-download" style="background-color: #7d7dff; margin-left:10px;">📄 Acessar Material 3</a>`;
-            // BOTÃO 4 NOVO:
-            if(post.link4 && post.link4.includes('http')) btns.innerHTML += `<a href="${post.link4}" target="_blank" class="btn-download" style="background-color: #555; margin-left:10px;">📄 Acessar Material 4</a>`;
-
-            document.getElementById('tela-lista').style.display = 'none';
-            document.getElementById('tela-leitura').style.display = 'block';
-            window.scrollTo(0,0);
-        }
-
-        function voltarParaLista() {
-            document.getElementById('tela-leitura').style.display = 'none';
-            document.getElementById('tela-lista').style.display = 'block';
         }
 
         carregarBlog();
