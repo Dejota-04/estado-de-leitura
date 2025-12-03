@@ -6,11 +6,9 @@
     <title>Estado de Leitura</title>
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
@@ -29,31 +27,90 @@
         }
         header h1 { font-size: 3rem; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); line-height: 1.1; }
         header p { font-size: 1.2rem; opacity: 0.9; letter-spacing: 1px; margin-top: 10px; }
-
         @media (max-width: 768px) { header h1 { font-size: 2rem; } header p { font-size: 1rem; } }
 
-        /* --- MENU --- */
+        /* --- MENU (NAVBAR) --- */
         nav { background: white; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        .menu-container { max-width: 1000px; margin: 0 auto; text-align: center; padding: 0 10px; }
+        .menu-container { max-width: 1000px; margin: 0 auto; padding: 0 10px; position: relative; }
+
+        /* Botão Hamburguer (Só aparece no mobile) */
+        .mobile-btn { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--primary-color); padding: 15px; }
+
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
         nav li { position: relative; }
         nav a { display: block; padding: 18px 20px; text-decoration: none; color: var(--primary-color); font-weight: bold; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; transition: 0.2s; cursor: pointer; white-space: nowrap; }
         nav a:hover { color: var(--accent-color); background: #fafafa; }
 
-        /* DROPDOWN */
-        .dropdown { position: relative; }
-        .dropdown-content { display: none; position: absolute; background: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); top: 100%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 1001; padding-top: 10px; margin-top: -5px; }
-        .dropdown:hover .dropdown-content { display: block; }
-        .dropdown-content a { border-bottom: 1px solid #f0f0f0; text-transform: none; padding: 12px 20px; display: block; }
+        /* Seta do Dropdown */
+        .arrow { margin-left: 5px; font-size: 0.7rem; transition: transform 0.3s; display: inline-block; color: var(--accent-color); }
 
-        /* MOBILE */
-        @media (max-width: 768px) {
-            nav a { padding: 12px 10px; font-size: 0.7rem; border-bottom: 1px solid #f9f9f9; width: 100%; }
-            nav ul { flex-direction: column; }
-            nav li { width: 100%; }
-            .dropdown-content { position: static; display: none; width: 100%; box-shadow: none; border: 1px solid #eee; transform: none; background: #fdfdfd; }
+        /* DROPDOWN DESKTOP */
+        .dropdown-content { display: none; position: absolute; background: white; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); top: 100%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 1001; padding-top: 10px; margin-top: -5px; }
+
+        /* Comportamento Desktop: Hover */
+        @media (min-width: 769px) {
             .dropdown:hover .dropdown-content { display: block; }
-            .dropdown-content a { padding-left: 0; color: #555; }
+            .dropdown-content a { border-bottom: 1px solid #f0f0f0; text-transform: none; padding: 12px 20px; display: block; }
+        }
+
+        /* --- MOBILE (AJUSTES PARA FICAR IGUAL A FOTO) --- */
+        @media (max-width: 768px) {
+            .mobile-btn { display: block; } /* Mostra o botão hamburguer */
+
+            nav .menu-container { text-align: left; display: flex; justify-content: space-between; align-items: center; }
+
+            nav ul {
+                display: none; /* Esconde o menu inicialmente */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: white;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+                border-top: 1px solid #eee;
+            }
+
+            nav ul.show { display: flex; } /* Classe para mostrar via JS */
+
+            nav li { width: 100%; text-align: left; }
+
+            nav a {
+                padding: 15px 25px;
+                font-size: 0.85rem;
+                border-bottom: 1px solid #f9f9f9;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            /* Dropdown Mobile */
+            .dropdown-content {
+                position: static;
+                display: none; /* Escondido por padrão */
+                width: 100%;
+                box-shadow: none;
+                border: none;
+                transform: none;
+                background: #fff;
+                padding-left: 20px; /* Indentação igual a foto */
+            }
+
+            .dropdown-content a {
+                color: #555;
+                font-weight: normal;
+                text-transform: none;
+                font-size: 0.9rem;
+                padding: 12px 20px;
+                border-bottom: 1px solid #eee;
+                text-align: left;
+            }
+
+            /* Quando o dropdown está ativo no mobile */
+            .dropdown.active .dropdown-content { display: block; }
+            .dropdown.active > a { color: var(--accent-color); } /* Texto vermelho igual a foto */
+            .dropdown.active .arrow { transform: rotate(180deg); }
         }
 
         .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
@@ -111,15 +168,7 @@
         #toast-box { visibility: hidden; min-width: 250px; background-color: var(--primary-color); color: #fff; text-align: center; border-radius: 4px; padding: 16px; position: fixed; z-index: 2000; left: 50%; bottom: 30px; transform: translateX(-50%); font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); opacity: 0; transition: opacity 0.5s, bottom 0.5s; }
         #toast-box.show { visibility: visible; opacity: 1; bottom: 50px; }
 
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            color: #777;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-            margin-top: 60px;
-            background: #fafafa;
-        }
+        footer { text-align: center; padding: 50px 20px; color: #777; font-size: 0.9rem; border-top: 1px solid #eee; margin-top: 60px; background: #fafafa; }
         footer p { margin-bottom: 10px; }
         footer strong { color: var(--primary-color); }
         footer a { color: var(--accent-color); text-decoration: none; font-weight: bold; }
@@ -138,17 +187,21 @@
 
     <nav>
         <div class="menu-container">
+            <button class="mobile-btn" onclick="toggleMenuMobile()">☰</button>
+
             <ul id="menu-list">
-                <li><a onclick="filtrar('tudo', null, true)">Início</a></li>
-                <li><a onclick="filtrar('Obras da Fuvest', null, true)">Obras da Fuvest</a></li>
+                <li><a onclick="filtrar('tudo', null, true); fecharMenu()">Início</a></li>
+                <li><a onclick="filtrar('Obras da Fuvest', null, true); fecharMenu()">Obras da Fuvest</a></li>
 
                 <li class="dropdown" id="lp-dropdown">
-                    <a style="cursor: default;">Língua Portuguesa ▾</a>
+                    <a onclick="toggleDropdownMobile(event)">
+                        Língua Portuguesa <span class="arrow">▼</span>
+                    </a>
                     <div class="dropdown-content" id="lp-content">
-                        <a onclick="filtrar('Língua Portuguesa', null, true)">Ver Todas</a>
-                        <a onclick="filtrar('Língua Portuguesa', 'Produção Escrita', true)">Produção Escrita</a>
-                        <a onclick="filtrar('Língua Portuguesa', 'Leitura', true)">Leitura</a>
-                        <a onclick="filtrar('Língua Portuguesa', 'Análise Linguística', true)">Análise Linguística</a>
+                        <a onclick="filtrar('Língua Portuguesa', null, true); fecharMenu()">Ver Todas</a>
+                        <a onclick="filtrar('Língua Portuguesa', 'Produção Escrita', true); fecharMenu()">Produção Escrita</a>
+                        <a onclick="filtrar('Língua Portuguesa', 'Leitura', true); fecharMenu()">Leitura</a>
+                        <a onclick="filtrar('Língua Portuguesa', 'Análise Linguística', true); fecharMenu()">Análise Linguística</a>
                     </div>
                 </li>
             </ul>
@@ -213,11 +266,34 @@
     <footer>
         <p><strong>Criado por:</strong> Adassa Bacci Abrahão Oliveira Amaral e Jheniffer Domingues Caetano</p>
         <p>📧 Contato: <a href="mailto:blogmelp2@gmail.com">blogmelp2@gmail.com</a></p>
-        <p style="margin-top: 20px; font-size: 0.75rem; opacity: 0.7;">&copy; 2025 Estado de Leitura - MELP 2 USP</p>
+        <p style="margin-top: 20px; font-size: 0.75rem; opacity: 0.7;">&copy; 2025 Estado de Leitura - MELP 2USP</p>
     </footer>
 
     <script>
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHpZ-AxInGfWLfEmzBVfNcATN9wGgYW0bgUUJ_pn48LvfibiKYYxQdAwlgs4RtjyJnqq1k-v_Q3hJM/pub?output=csv';
+
+        // --- FUNÇÕES DO MENU MOBILE ---
+        function toggleMenuMobile() {
+            const menu = document.getElementById('menu-list');
+            menu.classList.toggle('show');
+        }
+
+        function toggleDropdownMobile(e) {
+            // Verifica se está no mobile (largura menor que 768px)
+            if (window.innerWidth <= 768) {
+                e.preventDefault(); // Evita scroll ou ação padrão
+                const liParent = document.getElementById('lp-dropdown');
+                liParent.classList.toggle('active');
+            }
+        }
+
+        function fecharMenu() {
+            // Fecha o menu se clicar em um link (boa prática mobile)
+            if (window.innerWidth <= 768) {
+                document.getElementById('menu-list').classList.remove('show');
+            }
+        }
+        // ------------------------------
 
         let bancoDeDados = [];
 
@@ -234,17 +310,15 @@
                 download: true, header: false, skipEmptyLines: true,
                 complete: function(resultados) {
                     const linhas = resultados.data.slice(1);
-                    const slugsVistos = {}; // Mapa para evitar duplicidade de slug
+                    const slugsVistos = {};
 
                     bancoDeDados = linhas.map((c, index) => {
                         let titulo = c[2] || "Sem Titulo";
                         let autor = c[0] || "Desconhecido";
 
-                        // MÁGICA AQUI: SLUG É TITULO + AUTOR
                         let rawSlug = titulo + "-" + autor;
                         let baseSlug = criarSlug(rawSlug);
 
-                        // Segurança extra contra duplicidade (se mesmo autor tiver 2 posts iguais)
                         let uniqueSlug = baseSlug;
                         if (slugsVistos[baseSlug]) {
                             slugsVistos[baseSlug]++;
@@ -255,7 +329,7 @@
 
                         return {
                             id: index,
-                            slug: uniqueSlug, // Usa o slug gerado (titulo + autor)
+                            slug: uniqueSlug,
                             autor: autor,
                             ano: c[1],
                             titulo: titulo,
