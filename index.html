@@ -316,8 +316,8 @@
                         let titulo = c[2] || "Sem Titulo";
                         let autor = c[0] || "Desconhecido";
 
-                        // ALTERAÇÃO: URL agora é apenas o título
-                        let rawSlug = titulo;
+                        // 1. Gera o Slug OFICIAL (Título + Autor) - Formato Padrão
+                        let rawSlug = titulo + "-" + autor;
                         let baseSlug = criarSlug(rawSlug);
 
                         let uniqueSlug = baseSlug;
@@ -328,9 +328,14 @@
                             slugsVistos[baseSlug] = 1;
                         }
 
+                        // 2. Gera o Slug ANTIGO (Só Título) - Formato Legado/Backup
+                        let rawLegacy = titulo;
+                        let legacySlug = criarSlug(rawLegacy);
+
                         return {
                             id: index,
-                            slug: uniqueSlug,
+                            slug: uniqueSlug,       // URL Padrão (Longa)
+                            slugAntigo: legacySlug, // URL Backup (Curta)
                             autor: autor,
                             ano: c[1],
                             titulo: titulo,
@@ -351,7 +356,9 @@
             const sub = params.get('sub');
 
             if (postSlug) {
-                const post = bancoDeDados.find(p => p.slug === postSlug);
+                // Aceita tanto o link novo quanto o antigo
+                const post = bancoDeDados.find(p => p.slug === postSlug || p.slugAntigo === postSlug);
+
                 if (post) abrirPost(post.id, false);
             }
             else if (cat) {
